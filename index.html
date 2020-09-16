@@ -14,7 +14,8 @@
     <div class="stats">
         <h3 class="stats__title">{{"Текущих задач: "+ tasks.length}}</h3>
     </div>
-    <task @task_done="delete_task(index)" :key="index" v-for="(data,index) in tasks" :data="data" ></task>
+    <p><input class="search" type="text" v-model="name" placeholder="Поиск"/></p>
+    <task @task_done="delete_task(index)" :key="index" v-for="(data,index) in filteredList" :data="data"></task>
     <div class="add_task">
         <div class="add_task__input ">
             <input placeholder="Последовательность выполнения" type="number" v-model="new_task.id" required>

@@ -12,7 +12,7 @@ Vue.component('task', {
     <div class="task">
     <div class="task__number">{{data.id}}</div>
       <h3 class="task__title">{{data.name}}</h3>
-      <p v-if="data.date!=''" class="task__date">{{data.date}}</p>
+      <p class="task__date">{{data.date}}</p>
       <button class="task__done" @click="task_done()">✔️</button>
     </div>
     </div>`
@@ -21,6 +21,7 @@ Vue.component('task', {
 var vue = new Vue({
     el: '#app',
     data: {
+        name: '',
         new_task: {
             id: '',
             name: '',
@@ -30,8 +31,8 @@ var vue = new Vue({
         tasks: [
             {
                 id: '1',
-                name: 'Попробовать написать калькулятор',
-                date: '',
+                name: 'Прочитать книгу',
+                date: '16.01.20',
             },
             {
                 id: '1',
@@ -58,4 +59,14 @@ var vue = new Vue({
             this.tasks.splice(id, 1);
         }
     },
+    computed:{
+        filteredList: function(){
+            let comp = this.name;
+            return this.tasks.filter(function (elem) {
+
+                if(comp==='') return true;
+                else return elem.name.indexOf(comp) > -1;
+            })
+        }
+    }
 })
